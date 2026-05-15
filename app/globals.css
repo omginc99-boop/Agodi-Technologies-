@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  /* Agodi brand palette — deepened for cinematic premium feel */
+  --color-ink: #060311;
+  --color-night: #0F0822;
+  --color-navy: #0A0F2E;
+  --color-plum: #1F0B3A;
+  --color-purple-deep: #2A0F66;
+  --color-purple: #4B1FAF;
+  --color-purple-soft: #9F7BFF;
+  --color-orange: #FF8C00;
+  --color-orange-soft: #FFB347;
+  --color-cream: #FAFAF7;
+  --color-mist: #E8E2F2;
+  --color-stone: #7C7290;
+
+  --font-display: var(--font-display, 'Space Grotesk'), system-ui, sans-serif;
+  --font-body: var(--font-body, 'Inter'), system-ui, sans-serif;
+  --font-mono: var(--font-mono, 'Space Mono'), ui-monospace, monospace;
+  --font-sans: var(--font-body, 'Inter'), system-ui, sans-serif;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes shimmer-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #060311;
+  color: #FAFAF7;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Cinematic ecosystem background animations */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes orbit-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+  50% { transform: translate(20px, -30px); opacity: 0.7; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.08); }
+}
+@keyframes shimmer-mesh {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Section ambient — sits below hero for atmospheric continuity */
+.ambient-section {
+  position: relative;
+}
+.ambient-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(75,31,175,0.18) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 100%, rgba(255,140,0,0.10) 0%, transparent 40%);
+  z-index: -1;
+}
+
+/* Premium glass card */
+.glass-premium {
+  background: linear-gradient(135deg, rgba(75,31,175,0.08), rgba(255,140,0,0.04));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(159,123,255,0.18);
+  box-shadow: 0 8px 32px rgba(6,3,17,0.4);
+}
+.glass-premium:hover {
+  border-color: rgba(159,123,255,0.35);
+  box-shadow: 0 12px 48px rgba(75,31,175,0.30), 0 0 0 1px rgba(255,140,0,0.10);
+}
+
+/* Subtle global grid pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(105,54,209,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(105,54,209,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.glass {
+  background: linear-gradient(135deg, rgba(105,54,209,0.10), rgba(255,122,26,0.04));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(159,123,255,0.18);
+}
+
+.glass-strong {
+  background: linear-gradient(135deg, rgba(105,54,209,0.20), rgba(255,122,26,0.10));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(159,123,255,0.32);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #9F7BFF 0%, #FF7A1A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-orange {
+  background: linear-gradient(135deg, #FFAB66 0%, #FF7A1A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
