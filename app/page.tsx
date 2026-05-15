@@ -3,6 +3,7 @@ import { join } from "node:path";
 import Image from "next/image";
 import AgodiLogo from "@/components/AgodiLogo";
 import CinematicBackground from "@/components/CinematicBackground";
+import CountUp from "@/components/CountUp";
 
 // Check at build time whether the founder portrait has been provided.
 // Drop a `founder.jpg` (or `.png`) into /public/ to auto-replace the
@@ -235,19 +236,32 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Aggregate marquee — number proof, full-width below the grid */}
+          {/* Aggregate marquee — animated counters, full-width below the grid */}
           <div className="mt-24 grid grid-cols-2 lg:grid-cols-4 gap-px bg-purple-soft/15 rounded-2xl overflow-hidden glass fade-up" style={{ animationDelay: "0.4s" }}>
-            {[
-              { k: "3", v: "Live Products" },
-              { k: "30 days", v: "Zero → Three Launches" },
-              { k: "1B+", v: "Addressable Users" },
-              { k: "AI-Native", v: "Built With AI From Day One" },
-            ].map((s) => (
-              <div key={s.v} className="p-8 bg-ink/60">
-                <div className="font-mono font-bold text-3xl lg:text-5xl gradient-text-orange tracking-tight">{s.k}</div>
-                <div className="mt-3 text-xs text-stone uppercase tracking-[0.2em] font-mono">{s.v}</div>
+            <div className="p-8 bg-ink/60">
+              <div className="font-mono font-bold text-3xl lg:text-5xl gradient-text-orange tracking-tight">
+                <CountUp to={3} duration={1.8} />
               </div>
-            ))}
+              <div className="mt-3 text-xs text-stone uppercase tracking-[0.2em] font-mono">Live Products</div>
+            </div>
+            <div className="p-8 bg-ink/60">
+              <div className="font-mono font-bold text-3xl lg:text-5xl gradient-text-orange tracking-tight">
+                <CountUp to={30} duration={2} /> days
+              </div>
+              <div className="mt-3 text-xs text-stone uppercase tracking-[0.2em] font-mono">Zero → Three Launches</div>
+            </div>
+            <div className="p-8 bg-ink/60">
+              <div className="font-mono font-bold text-3xl lg:text-5xl gradient-text-orange tracking-tight">
+                <CountUp to={120} duration={2.4} />M+
+              </div>
+              <div className="mt-3 text-xs text-stone uppercase tracking-[0.2em] font-mono">Audience Reach</div>
+            </div>
+            <div className="p-8 bg-ink/60">
+              <div className="font-mono font-bold text-3xl lg:text-5xl gradient-text-orange tracking-tight">
+                <CountUp to={35} duration={2} />+
+              </div>
+              <div className="mt-3 text-xs text-stone uppercase tracking-[0.2em] font-mono">Countries Reached</div>
+            </div>
           </div>
         </div>
       </section>
