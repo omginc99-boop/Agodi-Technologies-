@@ -4,6 +4,7 @@ import Image from "next/image";
 import AgodiLogo from "@/components/AgodiLogo";
 import CinematicBackground from "@/components/CinematicBackground";
 import CountUp from "@/components/CountUp";
+import AnimatedHands from "@/components/AnimatedHands";
 
 // Check at build time whether the founder portrait has been provided.
 // Drop a `founder.jpg` (or `.png`) into /public/ to auto-replace the
@@ -18,6 +19,24 @@ const FOUNDER_PORTRAIT = (() => {
   return null;
 })();
 const FOUNDER_HAS_TRANSPARENT_BG = FOUNDER_PORTRAIT?.endsWith(".png") || FOUNDER_PORTRAIT?.endsWith(".webp");
+
+// Chief Engineer & MD portrait
+const CHIEF_ENG_PORTRAIT = (() => {
+  const dir = join(process.cwd(), "public");
+  for (const name of ["chief-engineer.png", "chief-engineer.webp", "chief-engineer.jpg", "chief-engineer.jpeg"]) {
+    if (existsSync(join(dir, name))) return `/${name}`;
+  }
+  return null;
+})();
+
+// Chief Finance Officer portrait
+const CFO_PORTRAIT = (() => {
+  const dir = join(process.cwd(), "public");
+  for (const name of ["cfo.png", "cfo.webp", "cfo.jpg", "cfo.jpeg", "finance.png", "finance.jpg"]) {
+    if (existsSync(join(dir, name))) return `/${name}`;
+  }
+  return null;
+})();
 
 // Hero-top image (above-the-fold). Looks for hero.* first — a brand cinematic
 // like the African man + AI dashboard shot. Falls back to hands.* if absent.
@@ -339,65 +358,9 @@ export default function Home() {
           </h2>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Image — cutout sits directly on the page background, no rectangular frame */}
+            {/* Image — two hands animate toward each other on scroll into view */}
             <div className="relative aspect-[5/4]">
-              <div
-                className="absolute -inset-12 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(255,122,26,0.18) 0%, rgba(105,54,209,0.15) 30%, transparent 70%)",
-                  filter: "blur(40px)",
-                }}
-                aria-hidden
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,171,102,0.40) 0%, rgba(159,123,255,0.22) 30%, transparent 60%)",
-                }}
-                aria-hidden
-              />
-              <div className="relative h-full w-full">
-                {HERO_IMAGE ? (
-                  <>
-                    <Image
-                      src={HERO_IMAGE}
-                      alt="AI meets Africa — a child's hand reaching toward the hand of a humanoid robot"
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 720px"
-                      style={{
-                        filter:
-                          "saturate(0.95) contrast(1.06) brightness(1.08) drop-shadow(0 30px 60px rgba(105,54,209,0.45))",
-                        WebkitMaskImage:
-                          "radial-gradient(ellipse 82% 92% at 50% 50%, black 62%, transparent 100%)",
-                        maskImage:
-                          "radial-gradient(ellipse 82% 92% at 50% 50%, black 62%, transparent 100%)",
-                      }}
-                    />
-                    <div
-                      className="absolute inset-0 pointer-events-none mix-blend-soft-light"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, #6936D1 0%, transparent 50%, #FF7A1A 100%)",
-                      }}
-                      aria-hidden
-                    />
-                  </>
-                ) : (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-br from-plum via-purple to-orange/50" />
-                    <div className="absolute inset-0 grid-bg opacity-35" aria-hidden />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-                      <div className="text-8xl mb-6 opacity-80">🤖 🤝 👶🏿</div>
-                      <div className="text-[10px] uppercase tracking-[0.3em] text-cream/50 font-semibold">
-                        Drop hands.jpg in /public
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
+              <AnimatedHands />
             </div>
 
             {/* Quote + supporting copy */}
@@ -544,130 +507,70 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOUNDER */}
+      {/* LEADERSHIP */}
       <section id="founder" className="relative py-32 px-6 lg:px-10 bg-night/50">
         <div className="max-w-6xl mx-auto">
           <div className="text-sm font-semibold uppercase tracking-[0.3em] text-orange mb-6">— Leadership</div>
           <h2 className="font-display font-black tracking-tight text-4xl lg:text-6xl leading-[1.05] mb-16">
-            Founded by a builder.<br />
+            Built by builders.<br />
             <span className="gradient-text">Backed by conviction.</span>
           </h2>
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 items-start">
-            <div className="relative">
-              <div className="absolute inset-0 rotate-3 rounded-3xl bg-gradient-to-br from-purple/30 to-orange/30 blur-2xl" aria-hidden />
-              <div className="relative glass-strong rounded-3xl overflow-hidden aspect-[3/4] flex flex-col">
-                {/* Portrait area — top 60% of the card */}
-                <div className="relative w-full flex-1 min-h-0 overflow-hidden">
-                  {FOUNDER_PORTRAIT ? (
-                    <>
-                      {/* Brand colour base — visible at the edges as the photo fades out */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-plum via-purple to-orange/20" aria-hidden />
 
-                      {/* The photo — same elliptical mask as the hands, so all 4 edges
-                          fade softly into the page background */}
-                      <Image
-                        src={FOUNDER_PORTRAIT}
-                        alt="Oluwami Stephen Olaitan Oladeji — Founder of Agodi Technologies"
-                        fill
-                        className="object-cover object-top"
-                        priority
-                        sizes="(max-width: 1024px) 100vw, 400px"
-                        style={{
-                          filter: "saturate(0.92) contrast(1.04) brightness(1.02)",
-                          WebkitMaskImage:
-                            "radial-gradient(ellipse 78% 88% at 50% 42%, black 50%, transparent 100%)",
-                          maskImage:
-                            "radial-gradient(ellipse 78% 88% at 50% 42%, black 50%, transparent 100%)",
-                        }}
-                      />
-
-                      {/* Bottom-to-card gradient: photo dissolves into the name plate below */}
-                      <div
-                        className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
-                        style={{
-                          background:
-                            "linear-gradient(to bottom, transparent 0%, rgba(10, 6, 18, 0.85) 100%)",
-                        }}
-                        aria-hidden
-                      />
-
-                      {/* Brand colour blend — gives the photo the page's mood */}
-                      <div
-                        className="absolute inset-0 pointer-events-none mix-blend-soft-light"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, #6936D1 0%, transparent 45%, transparent 60%, #FF7A1A 100%)",
-                        }}
-                        aria-hidden
-                      />
-
-                      {/* Subtle grain via the grid pattern over everything */}
-                      <div className="absolute inset-0 grid-bg opacity-15 pointer-events-none" aria-hidden />
-                    </>
-                  ) : (
-                    // Designed placeholder — looks intentional until a photo is dropped in
-                    <div className="absolute inset-0">
-                      <div className="absolute inset-0 bg-gradient-to-br from-plum via-purple to-orange/70" />
-                      <div className="absolute inset-0 grid-bg opacity-30" aria-hidden />
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "radial-gradient(circle at 50% 40%, rgba(255,171,102,0.35) 0%, transparent 60%)",
-                        }}
-                        aria-hidden
-                      />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-cream">
-                        <div className="font-display font-black text-[8rem] leading-none opacity-25 select-none">
-                          OO
-                        </div>
-                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-cream/50 whitespace-nowrap">
-                          Portrait · drop founder.jpg in /public
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {/* Brand mark — top-right corner of portrait */}
-                  <div className="absolute top-5 right-5 z-10">
-                    <AgodiLogo size={44} />
-                  </div>
-                </div>
-                {/* Name + role plate — bottom 40%. No hard border; the gradient above
-                    dissolves the photo straight into this plate. */}
-                <div className="px-8 py-7 bg-ink/80 backdrop-blur-md">
-                  <div className="text-stone text-[11px] uppercase tracking-[0.3em] mb-2">
-                    Founder &amp; Visionary Lead
-                  </div>
-                  <div className="font-mono font-bold text-sm text-cream leading-tight whitespace-nowrap tracking-tight">
-                    Oluwami Stephen Olaitan Oladeji
-                  </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
+            {[
+              {
+                key: "founder",
+                image: "/mgmt-founder.png",
+                alt: "Oluwami Stephen Olaitan Oladeji — Founder & CEO of Agodi Technologies",
+              },
+              {
+                key: "chief",
+                image: "/mgmt-engineer.png",
+                alt: "Olayemi Samuel Oladeji — Chief Engineer & Managing Director of Agodi Technologies",
+              },
+              {
+                key: "cfo",
+                image: "/mgmt-cfo.png",
+                alt: "Oluwasegun Shomade Gbemileke — Chief Financial Officer of Agodi Technologies",
+              },
+            ].map((leader) => (
+              <div key={leader.key} className="relative group">
+                {/* Soft brand glow behind the card */}
+                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-purple/40 via-purple-soft/10 to-orange/30 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity" aria-hidden />
+                <div className="relative rounded-2xl overflow-hidden ring-1 ring-purple-soft/20 group-hover:ring-purple-soft/40 transition-all">
+                  <Image
+                    src={leader.image}
+                    alt={leader.alt}
+                    width={1200}
+                    height={1800}
+                    className="w-full h-auto block"
+                    priority={leader.key === "founder"}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
               </div>
-            </div>
-            <div className="space-y-7 text-lg leading-relaxed text-mist/85 pt-6">
-              <p className="text-2xl text-cream font-display font-medium leading-snug">
-                &ldquo;The next globally recognised technology and entertainment ecosystems will emerge from Africa.
-                We&apos;re not waiting for permission to build them.&rdquo;
-              </p>
-              <p>
-                Oluwami Stephen Olaitan Oladeji is an entrepreneur, creative strategist, and technology
-                visionary focused on building globally scalable African-born intellectual property
-                and digital technology platforms.
-              </p>
-              <p>
-                He leads Agodi Technologies as Founder &amp; Visionary Lead — setting product
-                direction, owning creative and brand strategy across the portfolio, and engineering
-                the operating model that lets a small team ship at scale.
-              </p>
-              <div className="pt-4">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold border border-purple-soft/40 hover:border-purple-soft hover:bg-purple-soft/10 transition-all text-cream"
-                >
-                  Connect with the founder
-                  <span aria-hidden>→</span>
-                </a>
-              </div>
+            ))}
+          </div>
+
+          {/* Vision quote + connect */}
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-2xl lg:text-3xl text-cream font-display font-medium leading-snug">
+              &ldquo;The next globally recognised technology and entertainment ecosystems will emerge from Africa.
+              We&apos;re not waiting for permission to build them.&rdquo;
+            </p>
+            <p className="mt-8 text-mist/75 text-lg leading-relaxed">
+              Agodi Technologies is led by a team of builders engineering globally scalable African-born
+              intellectual property and digital technology platforms — across product, brand,
+              and infrastructure.
+            </p>
+            <div className="mt-10">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-semibold border border-purple-soft/40 hover:border-purple-soft hover:bg-purple-soft/10 transition-all text-cream"
+              >
+                Connect with leadership
+                <span aria-hidden>→</span>
+              </a>
             </div>
           </div>
         </div>
