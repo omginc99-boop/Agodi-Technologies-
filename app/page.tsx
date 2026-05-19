@@ -521,23 +521,35 @@ export default function Home() {
               {
                 key: "founder",
                 image: "/mgmt-founder.png",
+                name: "Oluwami Stephen Olaitan Oladeji",
+                role: "Founder & CEO",
+                email: "info@agoditechnologies.com",
+                subject: "Agodi Technologies — Founder Intro",
                 alt: "Oluwami Stephen Olaitan Oladeji — Founder & CEO of Agodi Technologies",
               },
               {
                 key: "chief",
                 image: "/mgmt-engineer.png",
+                name: "Olayemi Samuel Oladeji",
+                role: "Chief Engineer & Managing Director",
+                email: "olayemi.samuel@agoditechnologies.com",
+                subject: "Agodi Technologies — Chief Engineer Inquiry",
                 alt: "Olayemi Samuel Oladeji — Chief Engineer & Managing Director of Agodi Technologies",
               },
               {
                 key: "cfo",
                 image: "/mgmt-cfo.png",
+                name: "Oluwasegun Shomade Gbemileke",
+                role: "Chief Financial Officer",
+                email: "gbemileke@agoditechnologies.com",
+                subject: "Agodi Technologies — CFO Inquiry",
                 alt: "Oluwasegun Shomade Gbemileke — Chief Financial Officer of Agodi Technologies",
               },
             ].map((leader) => (
               <div key={leader.key} className="relative group">
                 {/* Soft brand glow behind the card */}
                 <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-purple/40 via-purple-soft/10 to-orange/30 blur-2xl opacity-60 group-hover:opacity-90 transition-opacity" aria-hidden />
-                <div className="relative rounded-2xl overflow-hidden ring-1 ring-purple-soft/20 group-hover:ring-purple-soft/40 transition-all">
+                <div className="relative rounded-2xl overflow-hidden ring-1 ring-purple-soft/20 group-hover:ring-purple-soft/40 transition-all bg-ink/95">
                   <Image
                     src={leader.image}
                     alt={leader.alt}
@@ -547,6 +559,20 @@ export default function Home() {
                     priority={leader.key === "founder"}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  <div className="px-5 py-5 border-t border-purple-soft/15">
+                    <div className="font-display font-bold text-cream text-lg lg:text-xl leading-tight mb-1">
+                      {leader.name}
+                    </div>
+                    <div className="text-orange text-xs lg:text-sm font-semibold uppercase tracking-wider mb-3">
+                      {leader.role}
+                    </div>
+                    <a
+                      href={`mailto:${leader.email}?subject=${encodeURIComponent(leader.subject)}`}
+                      className="text-mist/80 text-sm hover:text-cream hover:underline transition-colors break-all"
+                    >
+                      {leader.email}
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
