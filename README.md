@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agodi Technologies
+
+Portfolio and investor-pitch site for Agodi Technologies — parent company of [PlayOlu](https://playolu.com), Legal Buddy, and Oshun Health.
+
+Built with [Next.js](https://nextjs.org) and deployed on Vercel.
 
 ## Getting Started
 
