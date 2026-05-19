@@ -738,12 +738,12 @@ export default function Home() {
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <a
-              href="mailto:hello@playolu.com?subject=Agodi%20Technologies%20—%20Inquiry"
+              href="mailto:info@agoditechnologies.com?subject=Agodi%20Technologies%20—%20Inquiry"
               className="glass-strong rounded-2xl p-10 hover:scale-[1.02] transition-all group"
             >
               <div className="text-stone uppercase tracking-[0.2em] text-xs mb-4">Investor &amp; Partner Inbox</div>
               <div className="font-display font-bold text-2xl lg:text-3xl text-cream mb-4 group-hover:gradient-text transition-all">
-                hello@playolu.com
+                info@agoditechnologies.com
               </div>
               <div className="text-sm text-mist/70">Tap to send an introduction — we read every email.</div>
             </a>
@@ -754,7 +754,7 @@ export default function Home() {
               </div>
               <div className="text-orange font-medium mb-6">Founder &amp; Visionary Lead</div>
               <a
-                href="mailto:hello@playolu.com?subject=Agodi%20Technologies%20—%20Founder%20Intro"
+                href="mailto:info@agoditechnologies.com?subject=Agodi%20Technologies%20—%20Founder%20Intro"
                 className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-purple to-orange text-cream hover:shadow-lg hover:shadow-purple/30 transition-all"
               >
                 Contact the founder
