@@ -461,7 +461,7 @@ export default function Home() {
           {/* Other ventures strip */}
           <div className="mt-24 pt-16 border-t border-purple-soft/15">
             <h3 className="font-display font-bold text-2xl text-stone mb-10">More from the portfolio</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <a
                 href="https://legal-assist-nine.vercel.app"
                 target="_blank"
@@ -500,6 +500,26 @@ export default function Home() {
                 </p>
                 <span className="text-sm text-purple-soft inline-flex items-center gap-2">
                   Visit Oshun Health <span aria-hidden>↗</span>
+                </span>
+              </a>
+              <a
+                href="https://the100rand.shop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass rounded-2xl p-8 hover:glass-strong hover:-translate-y-1 transition-all group"
+              >
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-orange">Commerce</span>
+                  <span className="text-xs text-stone">Live · 2026-05-22</span>
+                </div>
+                <h4 className="font-display font-bold text-2xl text-cream mb-3 group-hover:text-purple-soft transition-colors">
+                  The 100 Rand Shop
+                </h4>
+                <p className="text-mist/70 mb-6">
+                  South Africa&apos;s most addictive R100 shop — almost for mahala. Flat-price commerce for the mass market.
+                </p>
+                <span className="text-sm text-purple-soft inline-flex items-center gap-2">
+                  Visit the shop <span aria-hidden>↗</span>
                 </span>
               </a>
             </div>
@@ -717,6 +737,7 @@ export default function Home() {
                 <li><a href="https://playolu.com" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">PlayOlu ↗</a></li>
                 <li><a href="https://legal-assist-nine.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">Legal Buddy ↗</a></li>
                 <li><a href="https://care-buddy-ten.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">Oshun Health ↗</a></li>
+                <li><a href="https://the100rand.shop" target="_blank" rel="noopener noreferrer" className="hover:text-cream transition-colors">The 100 Rand Shop ↗</a></li>
               </ul>
             </div>
             <div>
