@@ -522,6 +522,79 @@ export default function Home() {
                   Visit the shop <span aria-hidden>↗</span>
                 </span>
               </a>
+              <a
+                href="https://afriid.africa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass rounded-2xl p-8 hover:glass-strong hover:-translate-y-1 transition-all group relative overflow-hidden"
+                style={{
+                  boxShadow:
+                    "inset 0 0 0 1px rgba(16,201,137,0.18)",
+                }}
+              >
+                <div
+                  className="absolute inset-0 -z-10 pointer-events-none"
+                  style={{
+                    background:
+                      "radial-gradient(500px 200px at 100% 0%, rgba(16,201,137,0.16), transparent 60%)",
+                  }}
+                  aria-hidden
+                />
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#34e0a4" }}>
+                    Identity Network
+                  </span>
+                  <span className="text-xs text-stone">Live · 2026-05-28</span>
+                </div>
+                <h4 className="font-display font-bold text-2xl text-cream mb-3 group-hover:text-purple-soft transition-colors">
+                  AfriID<sup className="text-sm text-stone align-super ml-0.5">™</sup>
+                </h4>
+                <p className="text-mist/70 mb-6">
+                  Africa&apos;s consumer identity network. One verified identity. Everywhere — powered by IDVero™ infrastructure.
+                </p>
+                <span className="text-sm inline-flex items-center gap-2" style={{ color: "#34e0a4" }}>
+                  Visit AfriID <span aria-hidden>↗</span>
+                </span>
+              </a>
+            </div>
+
+            {/* Identity-protected portfolio strip */}
+            <div
+              className="mt-10 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4 justify-between"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(16,201,137,0.10), rgba(77,212,255,0.06))",
+                border: "1px solid rgba(16,201,137,0.25)",
+              }}
+            >
+              <div className="flex items-center gap-3 text-left">
+                <span style={{ fontSize: 26 }} aria-hidden>🛡️</span>
+                <div>
+                  <div className="font-display font-bold text-cream text-lg leading-tight">
+                    Identity-protected across the portfolio
+                  </div>
+                  <div className="text-mist/70 text-sm">
+                    Every Agodi product verifies real humans using AfriID™ + IDVero™.
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-xs">
+                {["Legal Buddy", "Sisi Nurse", "PlayOlu", "Helper", "100 Rand Shop"].map(
+                  (n) => (
+                    <span
+                      key={n}
+                      className="px-3 py-1 rounded-full font-semibold"
+                      style={{
+                        background: "rgba(16,201,137,0.14)",
+                        color: "#a3f0cb",
+                        border: "1px solid rgba(16,201,137,0.3)",
+                      }}
+                    >
+                      {n}
+                    </span>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
