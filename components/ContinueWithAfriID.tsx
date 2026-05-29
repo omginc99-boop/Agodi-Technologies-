@@ -64,8 +64,16 @@ export type AfriIDVerified = {
 //
 // Set in each project's Vercel → Settings → Environment Variables.
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_AFRIID_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_AFRIID_SUPABASE_ANON_KEY;
+// Read AfriID-specific env vars first, then fall back to whatever
+// Supabase env vars the host product already has set. This means
+// Helper (which already has NEXT_PUBLIC_SUPABASE_*) works without
+// needing duplicate env vars.
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_AFRIID_SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_AFRIID_SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const STORAGE_BUCKET = "afriid-verifications";
 
 let _supabase: SupabaseClient | null = null;
