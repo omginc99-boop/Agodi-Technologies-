@@ -128,6 +128,18 @@ async function submitToAfriIDBackend(args: {
   const product = detectProduct();
   const folder = `submissions/${verification_id}`;
 
+  // If the host product has the user signed into the same Supabase project
+  // (e.g. Helper), pick up their auth.users.id so the verification ties to
+  // their profile. Failing this just leaves user_id null — fine for
+  // anonymous flows on other Agodi products.
+  let auth_user_id: string | null = null;
+  try {
+    const { data } = await sb.auth.getUser();
+    auth_user_id = data?.user?.id ?? null;
+  } catch {
+    /* anonymous is fine */
+  }
+
   let selfie_path: string | null = null;
   let id_image_path: string | null = null;
 
@@ -154,6 +166,7 @@ async function submitToAfriIDBackend(args: {
     .insert({
       id: verification_id,
       user_ref: args.userRef,
+      user_id: auth_user_id,
       product,
       product_url: window.location.href.slice(0, 500),
       mode: args.mode,
