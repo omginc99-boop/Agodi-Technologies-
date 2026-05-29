@@ -10,6 +10,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
  * Continue with AfriID — real onboarding capture flow.
@@ -44,7 +45,129 @@ export type AfriIDVerified = {
   selfie?: string;
   /** Base64 data URL of the captured ID document image. */
   id_image?: string;
+  /** Supabase row id (uuid) of the verification submission. Present once
+   *  the submission has successfully landed in the backend. */
+  verification_id?: string;
 };
+
+// =====================================================================
+// Supabase backend
+// =====================================================================
+//
+// Reads Supabase URL + anon key from env vars. These can be set to the
+// same values across every Agodi product so all submissions land in
+// one place (the Helper Supabase project, pvhdhnjruvjjqnakulsq).
+//
+// Required env vars:
+//   NEXT_PUBLIC_AFRIID_SUPABASE_URL
+//   NEXT_PUBLIC_AFRIID_SUPABASE_ANON_KEY
+//
+// Set in each project's Vercel → Settings → Environment Variables.
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_AFRIID_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_AFRIID_SUPABASE_ANON_KEY;
+const STORAGE_BUCKET = "afriid-verifications";
+
+let _supabase: SupabaseClient | null = null;
+function getSupabase(): SupabaseClient | null {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  if (!_supabase) _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  return _supabase;
+}
+
+export function isAfriIDBackendConfigured(): boolean {
+  return Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+}
+
+/** Detect which Agodi product we're hosted in based on hostname. */
+function detectProduct(): string {
+  if (typeof window === "undefined") return "ssr";
+  const host = window.location.hostname.toLowerCase();
+  if (host.includes("helpers.africa")) return "helper";
+  if (host.includes("oshun.africa") || host.includes("sisinurse.africa")) return "sisi-nurse";
+  if (host.includes("the100rand.shop") || host.includes("100rand")) return "100randshop";
+  if (host.includes("legal-buddy.co.za") || host.includes("legal-assist")) return "legal-buddy";
+  if (host.includes("playolu.com")) return "playolu";
+  if (host.includes("agoditechnologies.com")) return "agodi";
+  if (host === "localhost" || host.startsWith("127.")) return "dev";
+  return host;
+}
+
+function dataUrlToBlob(dataUrl: string): Blob {
+  const [meta, b64] = dataUrl.split(",");
+  const mime = meta.match(/data:([^;]+)/)?.[1] || "image/jpeg";
+  const binary = atob(b64);
+  const len = binary.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+  return new Blob([bytes], { type: mime });
+}
+
+/**
+ * Submit a verification to the AfriID backend.
+ * Uploads the selfie + ID image to private Supabase Storage and inserts
+ * a row in public.afriid_verifications. Returns the Supabase row id.
+ *
+ * Throws if backend isn't configured or upload/insert fails — the
+ * caller must surface the error to the user (no silent fallback to mock).
+ */
+async function submitToAfriIDBackend(args: {
+  selfie: string | null;
+  idImage: string | null;
+  mode: Mode;
+  decision: { trust_score: number; badges: string[]; country: string };
+  userRef: string;
+}): Promise<string> {
+  const sb = getSupabase();
+  if (!sb) {
+    throw new Error(
+      "AfriID backend not configured. Missing NEXT_PUBLIC_AFRIID_SUPABASE_URL or NEXT_PUBLIC_AFRIID_SUPABASE_ANON_KEY.",
+    );
+  }
+  const verification_id = crypto.randomUUID();
+  const product = detectProduct();
+  const folder = `submissions/${verification_id}`;
+
+  let selfie_path: string | null = null;
+  let id_image_path: string | null = null;
+
+  if (args.selfie) {
+    const blob = dataUrlToBlob(args.selfie);
+    selfie_path = `${folder}/selfie.jpg`;
+    const { error } = await sb.storage
+      .from(STORAGE_BUCKET)
+      .upload(selfie_path, blob, { contentType: "image/jpeg", upsert: false });
+    if (error) throw new Error("Selfie upload failed: " + error.message);
+  }
+
+  if (args.idImage) {
+    const blob = dataUrlToBlob(args.idImage);
+    id_image_path = `${folder}/id.jpg`;
+    const { error } = await sb.storage
+      .from(STORAGE_BUCKET)
+      .upload(id_image_path, blob, { contentType: "image/jpeg", upsert: false });
+    if (error) throw new Error("ID upload failed: " + error.message);
+  }
+
+  const { error: insertError } = await sb
+    .from("afriid_verifications")
+    .insert({
+      id: verification_id,
+      user_ref: args.userRef,
+      product,
+      product_url: window.location.href.slice(0, 500),
+      mode: args.mode,
+      selfie_path,
+      id_image_path,
+      trust_score: args.decision.trust_score,
+      badges: args.decision.badges,
+      country: args.decision.country,
+      user_agent: navigator.userAgent.slice(0, 500),
+    });
+  if (insertError) throw new Error("Verification insert failed: " + insertError.message);
+
+  return verification_id;
+}
 
 export function getAfriIDVerified(): AfriIDVerified | null {
   if (typeof window === "undefined") return null;
@@ -398,12 +521,33 @@ function VerificationModal({
 
   const submit = useCallback(async () => {
     setStep("submitting");
-    // Brief realistic processing delay — the actual face matching + fraud
-    // scoring would happen on IDVero's backend at this point.
-    await new Promise((r) => setTimeout(r, 1600));
     const decision = runMockDecision({ hasLiveSelfie: mode === "live" });
+    const userRef = randomId();
+
+    // Real submission to Supabase. The verification_id returned is the
+    // primary key of the audit row in public.afriid_verifications.
+    let verificationId: string | undefined;
+    try {
+      verificationId = await submitToAfriIDBackend({
+        selfie,
+        idImage,
+        mode,
+        decision,
+        userRef,
+      });
+    } catch (e) {
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Couldn't submit verification. Please try again.",
+      );
+      setStep("error");
+      return;
+    }
+
     const v: AfriIDVerified = {
-      user_id: randomId(),
+      user_id: userRef,
+      verification_id: verificationId,
       display_name: "Verified user",
       trust_score: decision.trust_score,
       country: decision.country,
