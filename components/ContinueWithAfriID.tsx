@@ -252,6 +252,7 @@ function VerificationModal({
   const [idImage, setIdImage] = useState<string | null>(null);
   const [verified, setVerified] = useState<AfriIDVerified | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [streamTick, setStreamTick] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -303,6 +304,9 @@ function VerificationModal({
       setStep("error");
       return;
     }
+    // Transition to the camera step FIRST so the <video> element mounts.
+    // The useEffect below will then attach the stream once both are ready.
+    setStep("camera");
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -313,11 +317,8 @@ function VerificationModal({
         audio: false,
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play().catch(() => undefined);
-      }
-      setStep("camera");
+      // Force the effect to re-run by bumping a tick.
+      setStreamTick((t) => t + 1);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       const friendly =
@@ -330,6 +331,19 @@ function VerificationModal({
       setStep("error");
     }
   }, []);
+
+  // Attach the stream to the <video> element whenever step is "camera" and
+  // we have a stream. This avoids the race where requestCamera() tries to
+  // touch videoRef.current before the video element has mounted.
+  useEffect(() => {
+    if (step !== "camera") return;
+    const v = videoRef.current;
+    const s = streamRef.current;
+    if (v && s && v.srcObject !== s) {
+      v.srcObject = s;
+      v.play().catch(() => undefined);
+    }
+  }, [step, streamTick]);
 
   const captureSelfie = useCallback(async () => {
     const video = videoRef.current;
@@ -1072,33 +1086,75 @@ function DoneStep({
 }) {
   return (
     <div style={{ textAlign: "center", padding: "8px 0" }}>
-      <div
-        style={{
-          width: 96,
-          height: 96,
-          margin: "0 auto",
-          display: "grid",
-          placeItems: "center",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(16,201,137,0.25), transparent 70%)",
-        }}
-      >
+      {verified.selfie ? (
         <div
           style={{
-            width: 76,
-            height: 76,
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #34e0a4 0%, #10c989 100%)",
-            display: "grid",
-            placeItems: "center",
-            color: "#031b13",
-            boxShadow: "0 12px 30px -10px rgba(16,201,137,0.6)",
+            position: "relative",
+            width: 110,
+            height: 110,
+            margin: "0 auto",
           }}
         >
-          <CheckCircle2 size={36} strokeWidth={2.4} />
+          {}
+          <img
+            src={verified.selfie}
+            alt="Your verified selfie"
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              objectFit: "cover",
+              border: "3px solid #10c989",
+              boxShadow: "0 12px 30px -10px rgba(16,201,137,0.6)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              right: -2,
+              bottom: -2,
+              width: 34,
+              height: 34,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #34e0a4 0%, #10c989 100%)",
+              display: "grid",
+              placeItems: "center",
+              color: "#031b13",
+              border: "3px solid #050a18",
+            }}
+          >
+            <CheckCircle2 size={18} strokeWidth={3} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div
+          style={{
+            width: 96,
+            height: 96,
+            margin: "0 auto",
+            display: "grid",
+            placeItems: "center",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(16,201,137,0.25), transparent 70%)",
+          }}
+        >
+          <div
+            style={{
+              width: 76,
+              height: 76,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #34e0a4 0%, #10c989 100%)",
+              display: "grid",
+              placeItems: "center",
+              color: "#031b13",
+              boxShadow: "0 12px 30px -10px rgba(16,201,137,0.6)",
+            }}
+          >
+            <CheckCircle2 size={36} strokeWidth={2.4} />
+          </div>
+        </div>
+      )}
       <h3 style={{ marginTop: 16, fontSize: 22, fontWeight: 600, letterSpacing: -0.3 }}>
         You&apos;re verified.
       </h3>
