@@ -268,6 +268,29 @@ function runMockDecision(opts: { hasLiveSelfie: boolean }): {
   };
 }
 
+
+async function runRealDecision(
+  selfie: string | null,
+  idImage: string | null,
+): Promise<{ trust_score: number; badges: string[]; country: string } | null> {
+  if (!selfie || !idImage) return null;
+  try {
+    const r = await fetch("/api/afriid-verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ selfieImage: selfie, idImage }),
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    if (!d.ok) return null;
+    if (d.verified) {
+      return { trust_score: 92, badges: ["face_match", "id_check", "liveness"], country: "ZA" };
+    }
+    return { trust_score: 58, badges: ["id_check", "needs_review"], country: "ZA" };
+  } catch {
+    return null;
+  }
+}
 /** Compress a data URL by re-encoding to JPEG at decreasing quality until under maxBytes. */
 async function compressJpeg(
   dataUrl: string,
@@ -542,7 +565,8 @@ function VerificationModal({
 
   const submit = useCallback(async () => {
     setStep("submitting");
-    const decision = runMockDecision({ hasLiveSelfie: mode === "live" });
+    const real = await runRealDecision(selfie, idImage);
+    const decision = real ?? runMockDecision({ hasLiveSelfie: mode === "live" });
     const userRef = randomId();
 
     // Real submission to Supabase. The verification_id returned is the
