@@ -40,13 +40,38 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: #060311;
-  color: #FAFAF7;
+  background: #060b18;
+  color: #f5f7fb;
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
+
+/* ── Infrastructure theme: navy · electric blue · gold ── */
+.gold-text {
+  background: linear-gradient(100deg, #f6d79a, #e8b04b 45%, #c79633);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.blue-text {
+  background: linear-gradient(100deg, #7fb0ff, #2f6bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hairline { border: 1px solid rgba(255, 255, 255, 0.08); }
+.glass-navy {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+}
+.glass-navy:hover { border-color: rgba(232, 176, 75, 0.35); background: rgba(255, 255, 255, 0.045); }
+@keyframes net-pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.7; } }
+.net-pulse { animation: net-pulse 4s ease-in-out infinite; }
+@keyframes flow-dash { to { stroke-dashoffset: -1200; } }
+@keyframes spin-very-slow { to { transform: rotate(360deg); } }
 
 /* Cinematic ecosystem background animations */
 @keyframes orbit {

@@ -25,9 +25,9 @@ const mono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agodi Technologies — Engineering Africa's Digital Future",
+  title: "Agodi Technologies — Building the Digital Infrastructure for the Next Billion People",
   description:
-    "Agodi Technologies is a next-generation African technology company building globally scalable digital ecosystems across AI, entertainment, education, gaming, and digital infrastructure.",
+    "Agodi Technologies builds foundational digital infrastructure for identity, trust, work, commerce, education, and entertainment across Africa and beyond.",
   keywords: [
     "Agodi Technologies",
     "African technology",
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     "Oluwami Oladeji",
   ],
   openGraph: {
-    title: "Agodi Technologies — Engineering Africa's Digital Future",
+    title: "Agodi Technologies — Building the Digital Infrastructure for the Next Billion People",
     description:
       "African-born digital technology company building globally scalable platforms in AI, entertainment, education, and gaming.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agodi Technologies — Engineering Africa's Digital Future",
+    title: "Agodi Technologies — Building the Digital Infrastructure for the Next Billion People",
     description:
       "African-born digital technology company building globally scalable platforms.",
   },
