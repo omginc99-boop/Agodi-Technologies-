@@ -88,6 +88,34 @@ function NetworkBg() {
   );
 }
 
+function Skyline({ className = "" }: { className?: string }) {
+  // Deterministic navy city silhouette with sparse orange-lit windows.
+  const heights = [60, 100, 74, 130, 86, 150, 70, 116, 92, 140, 80, 108, 165, 84, 124, 72, 134, 96, 175, 78, 112, 90, 146, 66, 120, 100, 138];
+  const n = heights.length;
+  const bw = 1440 / n;
+  return (
+    <svg className={className} viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden>
+      {heights.map((h, i) => {
+        const x = i * bw;
+        const top = 200 - h;
+        const wins = [];
+        for (let r = 0; r * 18 < h - 16; r++) {
+          for (let c = 0; c < 3; c++) {
+            const lit = (i * 5 + r * 2 + c) % 7 === 0;
+            wins.push(<rect key={`${r}-${c}`} x={x + 8 + c * 12} y={top + 12 + r * 18} width="5" height="7" fill={lit ? "#FF8C00" : "rgba(255,255,255,0.05)"} />);
+          }
+        }
+        return (
+          <g key={i}>
+            <rect x={x} y={top} width={bw - 5} height={h} fill="#0a1426" />
+            {wins}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <main className="relative overflow-hidden" style={{ background: "#060b18" }}>
@@ -142,6 +170,50 @@ export default function Home() {
                 <span key={p} className="text-white/45 font-display font-medium">{p}</span>
               ))}
             </span>
+          </div>
+        </div>
+        {/* City skyline silhouette — like the reference composite */}
+        <div className="absolute bottom-0 left-0 w-full h-[180px] pointer-events-none z-0" style={{ WebkitMaskImage: "linear-gradient(to top, #000 58%, transparent)", maskImage: "linear-gradient(to top, #000 58%, transparent)" }}>
+          <Skyline className="absolute bottom-0 left-0 w-full h-full" />
+        </div>
+      </section>
+
+      {/* FAMILY — next generation */}
+      <section className="relative px-6 lg:px-10 py-24">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: GOLD }}>For the Next Generation</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em] leading-tight">
+              Built for African families.<br /><span className="gold-text">Designed for the world.</span>
+            </h2>
+            <p className="mt-5 text-white/60 text-[15px] leading-relaxed max-w-lg">
+              Behind every platform is a person, a family, a community. Agodi&apos;s infrastructure puts secure identity, trusted commerce, and real opportunity into the hands of the next billion people.
+            </p>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden hairline">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/hero.jpg" alt="An African family exploring Africa's digital future" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 90px rgba(6,11,24,0.55)" }} />
+          </div>
+        </div>
+      </section>
+
+      {/* AI × HUMANITY */}
+      <section id="ai-humanity" className="relative px-6 lg:px-10 py-24" style={{ background: "#070d1d" }}>
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.05fr] gap-12 items-center">
+          <div className="relative">
+            <div className="absolute inset-0 -z-10 blur-3xl" style={{ background: "radial-gradient(circle at 50% 55%, rgba(255,140,0,0.2), transparent 65%)" }} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/hands.png" alt="A robotic hand and a child's hand reaching toward each other" className="w-full object-contain" />
+          </div>
+          <div>
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: BLUE }}>AI × Humanity</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em] leading-tight">
+              Where intelligence meets <span className="gold-text">humanity.</span>
+            </h2>
+            <p className="mt-5 text-white/60 text-[15px] leading-relaxed max-w-lg">
+              We build AI-native infrastructure that reaches the next generation — not to replace people, but to extend what they can do. Technology in one hand. A child&apos;s future in the other.
+            </p>
           </div>
         </div>
       </section>
