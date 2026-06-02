@@ -40,7 +40,7 @@ const FLYWHEEL = [
   "More work creates more opportunity.",
 ];
 
-const GOLD = "#e8b04b";
+const GOLD = "#FF8C00"; // Agodi brand orange
 const BLUE = "#2f6bff";
 
 function Mark({ size = 34 }: { size?: number }) {
@@ -50,7 +50,7 @@ function Mark({ size = 34 }: { size?: number }) {
       style={{
         width: size,
         height: size,
-        background: `linear-gradient(135deg, #f6d79a, ${GOLD} 55%, #c79633)`,
+        background: `linear-gradient(135deg, #FFC178, ${GOLD} 55%, #E06A00)`,
         color: "#06070a",
         fontSize: size * 0.55,
       }}
@@ -78,7 +78,7 @@ function NetworkBg() {
         nodes.slice(i + 1).map(([x2, y2], j) => {
           const d = Math.hypot(x - x2, y - y2);
           if (d > 30) return null;
-          return <line key={`${i}-${j}`} x1={x} y1={y} x2={x2} y2={y2} stroke="rgba(232,176,75,0.18)" strokeWidth="0.18" />;
+          return <line key={`${i}-${j}`} x1={x} y1={y} x2={x2} y2={y2} stroke="rgba(255,140,0,0.18)" strokeWidth="0.18" />;
         }),
       )}
       {nodes.map(([x, y], i) => (
@@ -112,7 +112,7 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="relative px-6 lg:px-10 pt-24 pb-28 min-h-[88vh] flex items-center" style={{ background: "radial-gradient(120% 90% at 80% -10%, rgba(47,107,255,0.18), transparent 55%), radial-gradient(80% 70% at 100% 30%, rgba(232,176,75,0.10), transparent 60%)" }}>
+      <section id="top" className="relative px-6 lg:px-10 pt-24 pb-28 min-h-[88vh] flex items-center" style={{ background: "radial-gradient(120% 90% at 80% -10%, rgba(47,107,255,0.18), transparent 55%), radial-gradient(80% 70% at 100% 30%, rgba(255,140,0,0.10), transparent 60%)" }}>
         <NetworkBg />
         <div className="max-w-7xl mx-auto w-full relative">
           <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] mb-9 hairline fade-up" style={{ color: GOLD }}>
@@ -192,7 +192,7 @@ export default function Home() {
           {/* Connected diagram */}
           <div className="relative aspect-square max-w-md mx-auto w-full">
             <div className="absolute inset-0 grid place-items-center">
-              <div className="grid place-items-center rounded-2xl h-20 w-20 font-display font-bold text-lg z-10" style={{ background: `linear-gradient(135deg,#f6d79a,${GOLD})`, color: "#06070a" }}>Agodi</div>
+              <div className="grid place-items-center rounded-2xl h-20 w-20 font-display font-bold text-lg z-10" style={{ background: `linear-gradient(135deg,#FFC178,${GOLD})`, color: "#06070a" }}>Agodi</div>
             </div>
             {STACK.map((s, i) => {
               const angle = (i / STACK.length) * Math.PI * 2 - Math.PI / 2;
@@ -279,7 +279,7 @@ export default function Home() {
           </div>
           {/* Flywheel ring */}
           <div className="relative aspect-square max-w-md mx-auto w-full">
-            <div className="absolute inset-[14%] rounded-full" style={{ border: "1px dashed rgba(232,176,75,0.35)", animation: "spin-very-slow 40s linear infinite" }} />
+            <div className="absolute inset-[14%] rounded-full" style={{ border: "1px dashed rgba(255,140,0,0.35)", animation: "spin-very-slow 40s linear infinite" }} />
             <div className="absolute inset-0 grid place-items-center text-center">
               <div>
                 <div className="font-display font-bold text-lg gold-text">Flywheel</div>
