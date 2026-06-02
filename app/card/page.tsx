@@ -80,13 +80,10 @@ export default function CardPage() {
         {/* Identity */}
         <div className="mt-8">
           <h1
-            className="text-[30px] leading-tight font-semibold"
-            style={{ fontFamily: "var(--font-display), sans-serif" }}
+            className="whitespace-nowrap font-semibold tracking-tight"
+            style={{ fontFamily: "var(--font-display), sans-serif", fontSize: "clamp(15px, 5vw, 22px)" }}
           >
-            Oluwami Oladeji
-            <span className="block text-[18px] font-normal text-white/55">
-              Stephen Olaitan
-            </span>
+            Oluwami Oladeji Stephen Olaitan
           </h1>
           <div className="mt-2 inline-flex items-center rounded-full px-3 py-1 text-[12.5px] font-medium"
             style={{ background: "rgba(52,224,164,0.12)", color: EMERALD, border: `1px solid rgba(52,224,164,0.3)` }}>
