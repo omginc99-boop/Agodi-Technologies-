@@ -192,7 +192,7 @@ export default function Home() {
           </div>
           <div className="relative rounded-2xl overflow-hidden hairline">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/hero.jpg" alt="An African family exploring Africa's digital future" className="w-full h-full object-cover" />
+            <img src="/family-duo.jpg" alt="An African family exploring Africa's digital future" className="w-full h-full object-cover" />
             <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 0 90px rgba(6,11,24,0.55)" }} />
           </div>
         </div>
