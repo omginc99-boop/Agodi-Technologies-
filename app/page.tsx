@@ -30,7 +30,7 @@ const STATS = [
   { k: "Identity", v: "500M+", d: "people across Africa lack a verifiable digital identity." },
   { k: "Trust", v: "90%", d: "of cyberattacks begin with a single email." },
   { k: "Employment", v: "60%", d: "of Africa is under 25 — the world's youngest workforce." },
-  { k: "Commerce", v: "$180B", d: "Africa's internet economy by 2025." },
+  { k: "Commerce", v: "$712B", d: "Africa's projected internet economy by 2050." },
   { k: "Education", v: "1.4B", d: "people — the fastest-growing population on Earth." },
 ];
 
