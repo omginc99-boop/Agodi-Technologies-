@@ -72,6 +72,7 @@ body {
 .net-pulse { animation: net-pulse 4s ease-in-out infinite; }
 @keyframes flow-dash { to { stroke-dashoffset: -1200; } }
 @keyframes spin-very-slow { to { transform: rotate(360deg); } }
+@keyframes globe-rotate { to { background-position-x: -400px; } }
 
 /* Cinematic ecosystem background animations */
 @keyframes orbit {

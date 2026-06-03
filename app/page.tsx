@@ -1,4 +1,5 @@
 /* Agodi Technologies — Infrastructure for the Next Billion People */
+import Link from "next/link";
 
 const NAV = [
   { href: "#infrastructure", label: "Infrastructure" },
@@ -8,12 +9,12 @@ const NAV = [
 ];
 
 const STACK = [
-  { n: "01", name: "AfriID", layer: "Identity Infrastructure", tag: "Verify Once. Trusted Everywhere.", body: "Digital identity verification for governments, enterprises, platforms, and people.", href: "#ecosystem" },
-  { n: "02", name: "IDVero", layer: "Verification Infrastructure", tag: "Verify with Confidence.", body: "Identity verification APIs — KYC, KYB, onboarding, compliance, and business verification.", href: "https://idvero.vercel.app" },
-  { n: "03", name: "AfriMail", layer: "Trust Infrastructure", tag: "Trust Every Email.", body: "AI-powered email trust, phishing protection, cloned-email detection, and sender verification.", href: "https://afriemail.com" },
-  { n: "04", name: "Helpers", layer: "Workforce Infrastructure", tag: "Work. Hire. Empower.", body: "A trusted marketplace connecting skilled workers and service providers with opportunity.", href: "https://helpers.africa" },
-  { n: "05", name: "Marketplace Lagos", layer: "Commerce Infrastructure", tag: "Buy Local. Grow Local.", body: "Trusted digital commerce infrastructure for retailers, wholesalers, and entrepreneurs.", href: "https://marketplacelagos.com" },
-  { n: "06", name: "PlayOlu", layer: "Entertainment Infrastructure", tag: "Play With Purpose.", body: "Africa's digital entertainment ecosystem for children and families.", href: "https://playolu.com" },
+  { n: "01", slug: "afriid", name: "AfriID", layer: "Identity Infrastructure", tag: "Verify Once. Trusted Everywhere.", body: "Digital identity verification for governments, enterprises, platforms, and people." },
+  { n: "02", slug: "idvero", name: "IDVero", layer: "Verification Infrastructure", tag: "Verify with Confidence.", body: "Identity verification APIs — KYC, KYB, onboarding, compliance, and business verification." },
+  { n: "03", slug: "afrimail", name: "AfriMail", layer: "Trust Infrastructure", tag: "Trust Every Email.", body: "AI-powered email trust, phishing protection, cloned-email detection, and sender verification." },
+  { n: "04", slug: "helpers", name: "Helpers", layer: "Workforce Infrastructure", tag: "Work. Hire. Empower.", body: "A trusted marketplace connecting skilled workers and service providers with opportunity." },
+  { n: "05", slug: "marketplace-lagos", name: "Marketplace Lagos", layer: "Commerce Infrastructure", tag: "Buy Local. Grow Local.", body: "Trusted digital commerce infrastructure for retailers, wholesalers, and entrepreneurs." },
+  { n: "06", slug: "playolu", name: "PlayOlu", layer: "Entertainment Infrastructure", tag: "Play With Purpose.", body: "Africa's digital entertainment ecosystem for children and families." },
 ];
 
 const ECOSYSTEM = [
@@ -60,31 +61,21 @@ function Mark({ size = 34 }: { size?: number }) {
   );
 }
 
-function NetworkBg() {
-  // Subtle connected-node infrastructure motif behind the hero.
-  const nodes = [
-    [70, 18], [88, 34], [62, 46], [82, 62], [54, 70], [92, 78], [72, 88],
-  ];
+function Globe() {
+  // Rotating dotted globe with African hotspots + tilted orbit rings.
+  const hotspots = [[47, 44], [51, 52], [45, 58], [53, 61], [49, 67]];
   return (
-    <svg className="absolute right-0 top-0 h-full w-[60%] pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden>
-      <defs>
-        <radialGradient id="glow" cx="78%" cy="30%" r="60%">
-          <stop offset="0%" stopColor="rgba(47,107,255,0.25)" />
-          <stop offset="100%" stopColor="transparent" />
-        </radialGradient>
-      </defs>
-      <rect width="100" height="100" fill="url(#glow)" />
-      {nodes.map(([x, y], i) =>
-        nodes.slice(i + 1).map(([x2, y2], j) => {
-          const d = Math.hypot(x - x2, y - y2);
-          if (d > 30) return null;
-          return <line key={`${i}-${j}`} x1={x} y1={y} x2={x2} y2={y2} stroke="rgba(255,160,46,0.18)" strokeWidth="0.18" />;
-        }),
-      )}
-      {nodes.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r={i % 3 === 0 ? 0.9 : 0.55} fill={i % 3 === 0 ? GOLD : "#7fb0ff"} className="net-pulse" style={{ animationDelay: `${i * 0.4}s` }} />
-      ))}
-    </svg>
+    <div className="absolute right-[-8%] top-1/2 -translate-y-1/2 hidden md:block pointer-events-none" style={{ width: "min(48vw, 640px)", aspectRatio: "1" }} aria-hidden>
+      <div className="absolute inset-[5%] rounded-full overflow-hidden" style={{ boxShadow: "inset -26px -30px 80px rgba(0,0,0,0.72), inset 16px 16px 50px rgba(47,107,255,0.12), 0 0 80px rgba(47,107,255,0.20)" }}>
+        <div className="absolute inset-[-25%]" style={{ backgroundImage: "radial-gradient(circle, rgba(127,176,255,0.55) 1px, transparent 1.7px)", backgroundSize: "20px 20px", animation: "globe-rotate 28s linear infinite", WebkitMaskImage: "radial-gradient(circle at 44% 42%, #000 54%, transparent 75%)", maskImage: "radial-gradient(circle at 44% 42%, #000 54%, transparent 75%)" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 38% 33%, rgba(47,107,255,0.16), transparent 45%), radial-gradient(circle at 64% 70%, rgba(6,11,24,0.6), transparent 60%)" }} />
+        {hotspots.map(([x, y], i) => (
+          <span key={i} className="absolute rounded-full net-pulse" style={{ left: `${x}%`, top: `${y}%`, width: 6, height: 6, background: "#FFA02E", boxShadow: "0 0 12px #FFA02E", animationDelay: `${i * 0.5}s` }} />
+        ))}
+      </div>
+      <div className="absolute left-1/2 top-1/2 rounded-full" style={{ width: "120%", height: "120%", transform: "translate(-50%,-50%) rotate(-16deg) scaleY(0.34)", border: "1px solid rgba(255,160,46,0.22)" }} />
+      <div className="absolute left-1/2 top-1/2 rounded-full" style={{ width: "142%", height: "142%", transform: "translate(-50%,-50%) rotate(18deg) scaleY(0.26)", border: "1px solid rgba(47,107,255,0.18)" }} />
+    </div>
   );
 }
 
@@ -141,7 +132,7 @@ export default function Home() {
 
       {/* HERO */}
       <section id="top" className="relative px-6 lg:px-10 pt-24 pb-28 min-h-[88vh] flex items-center" style={{ background: "radial-gradient(120% 90% at 80% -10%, rgba(47,107,255,0.18), transparent 55%), radial-gradient(80% 70% at 100% 30%, rgba(255,160,46,0.10), transparent 60%)" }}>
-        <NetworkBg />
+        <Globe />
         <div className="max-w-7xl mx-auto w-full relative">
           <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] uppercase tracking-[0.22em] mb-9 hairline fade-up" style={{ color: GOLD }}>
             <span className="h-1.5 w-1.5 rounded-full net-pulse" style={{ background: GOLD }} /> Digital Infrastructure · Africa & Beyond
@@ -228,7 +219,7 @@ export default function Home() {
           </div>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {STACK.map((s) => (
-              <a key={s.name} href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
+              <Link key={s.name} href={`/infrastructure/${s.slug}`}
                 className="group rounded-2xl p-6 glass-navy transition-all hover:-translate-y-1">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[12px] text-white/35">{s.n}</span>
@@ -238,7 +229,7 @@ export default function Home() {
                 <div className="mt-1.5 text-[14px] font-semibold gold-text inline-block">{s.tag}</div>
                 <p className="mt-3 text-[13.5px] text-white/55 leading-relaxed">{s.body}</p>
                 <div className="mt-5 text-[13px] font-medium text-white/45 group-hover:text-white transition-colors">Learn more →</div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
