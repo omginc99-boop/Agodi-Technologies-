@@ -23,6 +23,7 @@ const PRODUCTS: { name: string; tag: string; href?: string }[] = [
   { name: "AfriMail", tag: "Email trust gateway", href: "https://afriemail.com" },
   { name: "Marketplace Lagos", tag: "Trust-first marketplace", href: "https://marketplacelagos.com" },
   { name: "Sisi Nurse", tag: "A nurse on your phone", href: "https://oshun.africa" },
+  { name: "Africa 5D Map", tag: "AI map of Africa", href: "https://africa5d.agoditechnologies.com" },
 ];
 
 function Action({

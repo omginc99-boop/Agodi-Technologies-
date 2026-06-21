@@ -112,6 +112,23 @@ export const PRODUCTS: Product[] = [
     ],
     url: "https://playolu.com",
   },
+  {
+    slug: "africa-5d-map",
+    n: "07",
+    name: "Africa 5D Map",
+    layer: "Intelligence Infrastructure",
+    tagline: "One Continent. Infinite Possibilities.",
+    summary: "A voice-first, AI-powered map of Africa across roads, data, history, culture, and the future.",
+    description:
+      "Africa 5D Map is the digital operating system of the continent — explore Africa across space, time, and intelligence through a holographic map and 3D globe, an AI guide (AFRIA), 5D data layers, real driving guidance, and a Guardian safety engine.",
+    capabilities: [
+      "AFRIA voice AI guide in 14 languages",
+      "5D layers — live data, time-travel & future Africa",
+      "Driving Mode + first-person cockpit",
+      "Guardian Mode — real road, weather & safety",
+    ],
+    url: "https://africa5d.agoditechnologies.com",
+  },
 ];
 
 export const productBySlug = (slug: string) => PRODUCTS.find((p) => p.slug === slug);
