@@ -306,12 +306,13 @@ export default function Home() {
             <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">The team building it.</h2>
             <p className="mt-4 text-white/55 text-[15px] leading-relaxed">Founder-led engineering with dedicated technology and finance leadership.</p>
           </div>
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {[
               { img: "/team-ceo-desk.jpg", name: "Oluwami Stephen Olaitan Oladeji", role: "Founder & Chief Executive Officer", tagline: "Dreamer. Builder. Leader." },
               { img: "/team-cto.jpg", name: "Olayemi Samuel Oladeji", role: "Chief Technology Officer", tagline: "Engineering Solutions. Powering the Future." },
               { img: "/team-cfo.jpg", name: "Oluwami Segun Gbemileke Shomade", role: "Chief Financial Officer", tagline: "Finance. Strategy. Growth." },
               { img: "/team-sales-asia.jpg", name: "Georgia Chu", role: "Executive Sales Director, Asia", tagline: "Sales. Partnerships. Expansion.", zoom: "scale(1.55)" },
+              { img: "/team-marketing-africa.jpg", name: "Titilola Ololade Akinmulero", role: "Regional Marketing Director, Africa", tagline: "Brand. Growth. Storytelling." },
             ].map((m: { img: string; name: string; role: string; tagline: string; zoom?: string }) => (
               <div key={m.name} className="rounded-2xl overflow-hidden glass-navy shadow-2xl transition-colors duration-300 hover:border-[#2f6bff]/60">
                 <div className="h-80 overflow-hidden" style={{ background: "#070d1d" }}>
