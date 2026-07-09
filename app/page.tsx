@@ -277,18 +277,55 @@ export default function Home() {
 
       {/* FOUNDER */}
       <section id="founder" className="relative px-6 lg:px-10 py-28" style={{ background: "#070d1d" }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: BLUE }}>Founder Vision</div>
-          <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">Founded by Builders.</h2>
-          <p className="mt-7 text-[16px] lg:text-lg text-white/65 leading-relaxed">
-            Agodi Technologies was founded by <span className="text-white font-medium">Oluwami Stephen Olaitan Oladeji</span> with a simple belief:
-          </p>
-          <p className="mt-5 font-display text-2xl lg:text-3xl leading-snug gold-text inline-block">
-            Africa should not only consume technology. Africa should build the infrastructure that powers the future.
-          </p>
-          <p className="mt-7 text-[15px] text-white/55 leading-relaxed max-w-2xl mx-auto">
-            What began as a vision has evolved into a portfolio of platforms designed to solve identity, trust, workforce, commerce, and entertainment challenges at scale.
-          </p>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-center">
+          <div>
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: BLUE }}>Founder Vision</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">Founded by Builders.</h2>
+            <div className="mt-6 font-display font-bold text-xl lg:text-2xl">Oluwami Stephen Olaitan Oladeji</div>
+            <div className="mt-1.5 text-[13px] uppercase tracking-[0.16em]" style={{ color: GOLD }}>Founder &amp; Chief Executive Officer</div>
+            <p className="mt-6 font-display text-2xl lg:text-3xl leading-snug gold-text inline-block">
+              Africa should not only consume technology. Africa should build the infrastructure that powers the future.
+            </p>
+            <p className="mt-7 text-[15px] text-white/60 leading-relaxed max-w-2xl">
+              Agodi Technologies was founded on a simple belief. What began as a vision has evolved into a portfolio of platforms designed to solve identity, trust, workforce, commerce, and entertainment challenges at scale.
+            </p>
+            <p className="mt-6 font-display text-[16px] text-white/80 italic">&ldquo;I don&rsquo;t just build businesses. I build legacies.&rdquo;</p>
+          </div>
+          <div className="rounded-3xl overflow-hidden glass-navy shadow-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/founder.jpg" alt="Oluwami Stephen Olaitan Oladeji — Founder & CEO" className="w-full h-auto block" />
+          </div>
+        </div>
+      </section>
+
+      {/* LEADERSHIP */}
+      <section id="leadership" className="relative px-6 lg:px-10 py-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-2xl">
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: BLUE }}>Leadership</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">The team building it.</h2>
+            <p className="mt-4 text-white/55 text-[15px] leading-relaxed">Founder-led engineering with dedicated technology and finance leadership.</p>
+          </div>
+          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            {[
+              { img: "/team-ceo.jpg", name: "Oluwami Stephen Olaitan Oladeji", role: "Founder & Chief Executive Officer", tagline: "Dreamer. Builder. Leader." },
+              { img: "/team-cto.jpg", name: "Olayemi Samuel Oladeji", role: "Chief Technology Officer", tagline: "Engineering Solutions. Powering the Future." },
+              { img: "/team-cfo.jpg", name: "Oluwami Segun Gbemileke Shomade", role: "Chief Financial Officer", tagline: "Finance. Strategy. Growth." },
+              { img: "/team-sales-asia.jpg", name: "Georgia Chu", role: "Executive Sales Director, Asia", tagline: "Sales. Partnerships. Expansion." },
+            ].map((m) => (
+              <div key={m.name} className="rounded-2xl overflow-hidden glass-navy shadow-2xl transition-colors duration-300 hover:border-[#2f6bff]/60">
+                <div className="h-80 overflow-hidden" style={{ background: "#070d1d" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.img} alt={m.name} className="w-full h-full object-cover" style={{ objectPosition: "center top" }} />
+                </div>
+                <div className="p-6 border-t-2" style={{ borderColor: GOLD }}>
+                  <div className="font-display font-bold text-[17px] leading-snug text-white">{m.name}</div>
+                  <div className="mt-1.5 text-[13px] font-semibold" style={{ color: GOLD }}>{m.role}</div>
+                  <div className="mt-2 text-[12px] uppercase tracking-[0.14em]" style={{ color: "rgba(47,107,255,0.85)" }}>{m.tagline}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
