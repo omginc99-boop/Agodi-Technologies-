@@ -308,15 +308,15 @@ export default function Home() {
           </div>
           <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
             {[
-              { img: "/team-ceo.jpg", name: "Oluwami Stephen Olaitan Oladeji", role: "Founder & Chief Executive Officer", tagline: "Dreamer. Builder. Leader." },
+              { img: "/team-ceo-desk.jpg", name: "Oluwami Stephen Olaitan Oladeji", role: "Founder & Chief Executive Officer", tagline: "Dreamer. Builder. Leader." },
               { img: "/team-cto.jpg", name: "Olayemi Samuel Oladeji", role: "Chief Technology Officer", tagline: "Engineering Solutions. Powering the Future." },
               { img: "/team-cfo.jpg", name: "Oluwami Segun Gbemileke Shomade", role: "Chief Financial Officer", tagline: "Finance. Strategy. Growth." },
-              { img: "/team-sales-asia.jpg", name: "Georgia Chu", role: "Executive Sales Director, Asia", tagline: "Sales. Partnerships. Expansion." },
-            ].map((m) => (
+              { img: "/team-sales-asia.jpg", name: "Georgia Chu", role: "Executive Sales Director, Asia", tagline: "Sales. Partnerships. Expansion.", zoom: "scale(1.55)" },
+            ].map((m: { img: string; name: string; role: string; tagline: string; zoom?: string }) => (
               <div key={m.name} className="rounded-2xl overflow-hidden glass-navy shadow-2xl transition-colors duration-300 hover:border-[#2f6bff]/60">
                 <div className="h-80 overflow-hidden" style={{ background: "#070d1d" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={m.img} alt={m.name} className="w-full h-full object-cover" style={{ objectPosition: "center top" }} />
+                  <img src={m.img} alt={m.name} className="w-full h-full object-cover" style={{ objectPosition: "center top", transform: m.zoom, transformOrigin: "50% 6%" }} />
                 </div>
                 <div className="p-6 border-t-2" style={{ borderColor: GOLD }}>
                   <div className="font-display font-bold text-[17px] leading-snug text-white">{m.name}</div>
