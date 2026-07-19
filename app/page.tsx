@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const NAV = [
   { href: "#infrastructure", label: "Infrastructure" },
+  { href: "#portfolio", label: "Portfolio" },
   { href: "#ecosystem", label: "Ecosystem" },
   { href: "#vision", label: "Vision" },
   { href: "#investors", label: "Investors" },
@@ -15,6 +16,31 @@ const STACK = [
   { n: "04", slug: "helpers", name: "Helpers", layer: "Workforce Infrastructure", tag: "Work. Hire. Empower.", body: "A trusted marketplace connecting skilled workers and service providers with opportunity." },
   { n: "05", slug: "marketplace-lagos", name: "Marketplace Lagos", layer: "Commerce Infrastructure", tag: "Buy Local. Grow Local.", body: "Trusted digital commerce infrastructure for retailers, wholesalers, and entrepreneurs." },
   { n: "06", slug: "playolu", name: "PlayOlu", layer: "Entertainment Infrastructure", tag: "Play With Purpose.", body: "Africa's digital entertainment ecosystem for children and families." },
+];
+
+const PORTFOLIO = [
+  { name: "AfriID", cat: "Identity", url: "https://afriid.africa", body: "One African identity — verify once, trusted everywhere." },
+  { name: "IDVero", cat: "Verification", url: "https://getidvero.africa", body: "Identity verification APIs — KYC, KYB, and compliance infrastructure." },
+  { name: "AfriMail", cat: "Email Security", url: "https://afriemail.com", body: "AI-powered email trust — phishing, spoofing, and clone detection." },
+  { name: "AfriVPN", cat: "Privacy", url: "https://afrivpn.app", body: "Privacy-first VPN with stealth mode and an AI assistant." },
+  { name: "Afri Home Guard", cat: "Smart Home", url: "https://agodi-home-guard.vercel.app", body: "AI security guard and home assistant in one app." },
+  { name: "Legal Buddy", cat: "Legal", url: "https://legal-buddy.co.za", body: "AI-triaged legal help connecting people to vetted lawyers." },
+  { name: "Sisi Nurse", cat: "Health", url: "https://sisinurse.africa", body: "A nurse on your phone — matched with real registered clinicians." },
+  { name: "Helpers", cat: "Work", url: "https://helpers.africa", body: "Trusted work nearby — hire verified skilled workers." },
+  { name: "PlayOlu", cat: "Kids & Learning", url: "https://playolu.com", body: "Safe learning games and stories for children up to 12." },
+  { name: "Olu Piggy Bank", cat: "Kids Fintech", url: "https://olupiggybank.com", body: "The digital piggy bank teaching kids to save, spend, and give." },
+  { name: "SchoolID", cat: "Education", url: "https://schools-id.com", body: "The digital operating system for schools — one platform, every role." },
+  { name: "The 100 Rand Shop", cat: "Commerce", url: "https://the100rand.shop", body: "Everything R100. Nothing more. Nothing less." },
+  { name: "Marketplace Lagos", cat: "Commerce", url: "https://marketplacelagos.com", body: "Verified Lagos sellers with escrow-protected payments." },
+  { name: "Computer Village", cat: "Tech Marketplace", url: "https://computer-village.africa", body: "Africa's digital technology marketplace — buy, sell, repair, connect." },
+  { name: "Alaba Market", cat: "Commerce", url: "https://alabainternational.africa", body: "West Africa's electronics marketplace, online." },
+  { name: "Folad Sisters Fresh Fish", cat: "Food Commerce", url: "https://foladfish.vercel.app", body: "Fresh seafood, straight from the fishermen to your door." },
+  { name: "AfriStream", cat: "Entertainment", url: "https://afristream.africa", body: "Africa's AI-native entertainment platform." },
+  { name: "AfrieSIM", cat: "Travel", url: "https://afri-esim.com", body: "One eSIM. Every border. AI-powered travel connectivity." },
+  { name: "Africa 5D Map", cat: "AI Maps", url: "https://africa-5d-map.vercel.app", body: "A voice-first digital map of Africa — see the continent beyond the map." },
+  { name: "Talent & Skills", cat: "Creators", url: "https://talentandskills.agoditechnologies.com", body: "Get discovered. Get booked. Get paid." },
+  { name: "The Gentlemen's Club", cat: "Lifestyle", url: "https://gentlemans-society.vercel.app", body: "A private members' club for nightlife, dining, and concierge." },
+  { name: "Citizen Connect", cat: "GovTech", url: "https://citizen-services-lake.vercel.app", body: "Identity, payments, and public services in one secure system." },
 ];
 
 const ECOSYSTEM = [
@@ -230,6 +256,30 @@ export default function Home() {
                 <p className="mt-3 text-[13.5px] text-white/55 leading-relaxed">{s.body}</p>
                 <div className="mt-5 text-[13px] font-medium text-white/45 group-hover:text-white transition-colors">Learn more →</div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PORTFOLIO */}
+      <section id="portfolio" className="relative px-6 lg:px-10 py-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-2xl">
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: GOLD }}>The Agodi Portfolio</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">{PORTFOLIO.length} live platforms. One group.</h2>
+            <p className="mt-4 text-white/55 text-[15px] leading-relaxed">Every product below is live today — built, launched, and operated by Agodi Technologies.</p>
+          </div>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {PORTFOLIO.map((p) => (
+              <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer"
+                className="group rounded-2xl p-5 glass-navy transition-all hover:-translate-y-1">
+                <div className="text-[11px] uppercase tracking-[0.16em]" style={{ color: BLUE }}>{p.cat}</div>
+                <h3 className="mt-3 font-display font-bold text-[18px] leading-snug">{p.name}</h3>
+                <p className="mt-2 text-[13px] text-white/55 leading-relaxed">{p.body}</p>
+                <div className="mt-4 text-[12.5px] font-medium text-white/45 group-hover:text-white transition-colors">
+                  {p.url.replace("https://", "")} →
+                </div>
+              </a>
             ))}
           </div>
         </div>
