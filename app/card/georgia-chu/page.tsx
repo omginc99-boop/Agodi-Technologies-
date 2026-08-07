@@ -10,7 +10,7 @@ const EMERALD = "#34e0a4";
 const PURPLE = "#4B1FAF";
 const ORANGE = "#FF8C00";
 
-const PHONE = "+17205925025";
+const PHONE = "17205925025";
 const EMAIL = "georgiachu28@gmail.com";
 const LEADERSHIP = "https://agoditechnologies.com/#leadership";
 
@@ -112,8 +112,8 @@ export default function GeorgiaCardPage() {
         <div className="mt-7 grid grid-cols-4 gap-2.5">
           <Action href="/georgia-chu.vcf" label="Save" icon="↓" accent={EMERALD} />
           <Action href={`tel:${PHONE}`} label="Call" icon="✆" accent="#ffffff" />
-          <Action href={`https://wa.me/${PHONE.replace("+", "")}`} label="WhatsApp" icon="◍" accent="#25D366" external />
           <Action href={`mailto:${EMAIL}`} label="Email" icon="✉" accent={ORANGE} />
+          <Action href="https://agoditechnologies.com" label="Web" icon="◎" accent={PURPLE} external />
         </div>
 
         {/* Leadership CTA */}
@@ -137,7 +137,7 @@ export default function GeorgiaCardPage() {
           <div className="grid gap-2 text-[13px]">
             <a href={`tel:${PHONE}`} className="flex items-center gap-3 text-white/80">
               <span className="text-white/40">Phone</span>
-              <span className="ml-auto" style={{ color: EMERALD }}>+1 720 592 5025</span>
+              <span className="ml-auto" style={{ color: EMERALD }}>17205925025</span>
             </a>
             <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 text-white/80">
               <span className="text-white/40">Email</span>
