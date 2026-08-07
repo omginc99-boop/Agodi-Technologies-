@@ -5,6 +5,7 @@ const NAV = [
   { href: "#infrastructure", label: "Infrastructure" },
   { href: "#portfolio", label: "Portfolio" },
   { href: "#ecosystem", label: "Ecosystem" },
+  { href: "#partners", label: "Partners" },
   { href: "#vision", label: "Vision" },
   { href: "#investors", label: "Investors" },
 ];
@@ -376,6 +377,51 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STRATEGIC PARTNERS */}
+      <section id="partners" className="relative px-6 lg:px-10 py-28" style={{ background: "#070d1d" }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-2xl">
+            <div className="text-[12px] uppercase tracking-[0.24em] mb-4" style={{ color: GOLD }}>Strategic Partners</div>
+            <h2 className="font-display font-bold text-3xl lg:text-5xl tracking-[-0.02em]">Building with global technology leaders.</h2>
+            <p className="mt-4 text-white/55 text-[15px] leading-relaxed">We partner with world-class technology companies to bring sovereign, enterprise-grade infrastructure to African governments, enterprises, and developers.</p>
+          </div>
+
+          <div className="mt-12 grid lg:grid-cols-[1.1fr_1fr] gap-6">
+            {/* SYNX feature card */}
+            <div className="rounded-2xl p-8 glass-navy flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="font-display font-bold text-4xl tracking-[0.06em]">SYNX</span>
+                  <span className="rounded-full px-3 py-1 text-[11px] font-semibold" style={{ background: "rgba(47,107,255,0.12)", color: BLUE, border: "1px solid rgba(47,107,255,0.3)" }}>Data &amp; Analytics Infrastructure</span>
+                </div>
+                <div className="mt-2 text-[13px] text-white/45">Synx Data Labs, Inc. · Sacramento, USA</div>
+                <p className="mt-5 text-[15px] text-white/70 leading-relaxed">
+                  Enterprise data and analytics infrastructure — <span className="text-white">SynxDB, SynxDB Cloud, and SynxML</span>, built on Apache Cloudberry. High-performance, sovereign-ready data platforms for the AI era.
+                </p>
+              </div>
+              <div className="mt-8 border-t hairline pt-6">
+                <div className="text-[11px] uppercase tracking-[0.18em]" style={{ color: GOLD }}>The Partnership</div>
+                <p className="mt-2 text-[14px] text-white/70">Agodi Technologies is SYNX&apos;s <span className="text-white font-semibold">Preferred Pan-African Strategic Partner</span> — bringing world-class data infrastructure to enterprises and governments across Africa.</p>
+              </div>
+            </div>
+
+            {/* Value pillars */}
+            <div className="grid gap-4">
+              {[
+                ["Sovereign data platforms", "Deploy high-performance analytics in-region for compliance and data sovereignty."],
+                ["Enterprise & government scale", "Greenplum-grade migration paths for banks, telcos, and public institutions."],
+                ["AI-ready infrastructure", "SynxML brings machine learning directly to the data layer."],
+              ].map(([t, d]) => (
+                <div key={t} className="rounded-2xl p-6 glass-navy">
+                  <div className="font-display font-semibold text-[17px]">{t}</div>
+                  <p className="mt-2 text-[13px] text-white/55 leading-relaxed">{d}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
