@@ -8,6 +8,7 @@ const NAV = [
   { href: "#partners", label: "Partners" },
   { href: "#vision", label: "Vision" },
   { href: "#investors", label: "Investors" },
+  { href: "/early-access", label: "Early Access" },
 ];
 
 const STACK = [
