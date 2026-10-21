@@ -11,7 +11,7 @@ const PURPLE = "#4B1FAF";
 const ORANGE = "#FF8C00";
 
 const PHONE = "17205925025";
-const EMAIL = "georgiachu28@gmail.com";
+const EMAIL = "skills@agoditechnologies.com";
 const LEADERSHIP = "https://agoditechnologies.com/#leadership";
 
 function Action({
