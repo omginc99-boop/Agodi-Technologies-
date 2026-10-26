@@ -516,7 +516,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto mt-20 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-white/40" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <div className="flex items-center gap-2.5"><Mark size={24} /> Agodi Technologies (Pty) Ltd · Reg. 2026/674916/07</div>
           <div>info@agoditechnologies.com · 55 Aston Rd, Sandton, Johannesburg</div>
-          <div>© 2026 Agodi Technologies</div>
+          <div className="flex items-center gap-3">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Notice</Link>
+            <span>© 2026 Agodi Technologies</span>
+          </div>
         </div>
       </section>
     </main>

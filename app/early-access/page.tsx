@@ -146,9 +146,12 @@ export default function EarlyAccessPage() {
       {/* FOOTER */}
       <section className="relative px-6 lg:px-10 py-10" style={{ background: "#070d1d" }}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-white/40 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="flex items-center gap-2.5"><Mark size={22} /> Agodi Technologies (Pty) Ltd</div>
+          <div className="flex items-center gap-2.5"><Mark size={22} /> Agodi Technologies (Pty) Ltd · Reg. 2026/674916/07</div>
           <div>info@agoditechnologies.com</div>
-          <div>© 2026 Agodi Technologies</div>
+          <div className="flex items-center gap-3">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Notice</Link>
+            <span>© 2026 Agodi Technologies</span>
+          </div>
         </div>
       </section>
     </main>
