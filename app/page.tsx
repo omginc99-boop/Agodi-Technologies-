@@ -55,11 +55,11 @@ const ECOSYSTEM = [
 ];
 
 const STATS = [
-  { k: "Identity", v: "500M+", d: "people across Africa lack a verifiable digital identity." },
-  { k: "Trust", v: "90%", d: "of cyberattacks begin with a single email." },
-  { k: "Employment", v: "60%", d: "of Africa is under 25 — the world's youngest workforce." },
-  { k: "Commerce", v: "$712B", d: "Africa's projected internet economy by 2050." },
-  { k: "Education", v: "1.4B", d: "people — the fastest-growing population on Earth." },
+  { k: "Identity", v: "500M+", d: "people across Africa lack a verifiable digital identity.", src: "World Bank ID4D" },
+  { k: "Trust", v: "16%", d: "of data breaches start with phishing — email remains a leading attack vector.", src: "Verizon 2025 Data Breach Investigations Report" },
+  { k: "Employment", v: "60%", d: "of Africa is under 25 — the world's youngest workforce.", src: "UN / UNFPA" },
+  { k: "Commerce", v: "$712B", d: "Africa's projected internet economy by 2050.", src: "Google / IFC e-Conomy Africa 2020" },
+  { k: "Education", v: "1.5B+", d: "people — among the fastest-growing populations on Earth.", src: "UN World Population Prospects" },
 ];
 
 const FLYWHEEL = [
@@ -441,6 +441,7 @@ export default function Home() {
                 <div className="text-[11px] uppercase tracking-[0.18em]" style={{ color: BLUE }}>{s.k}</div>
                 <div className="mt-3 font-display font-bold text-4xl gold-text inline-block">{s.v}</div>
                 <p className="mt-2 text-[13px] text-white/55 leading-relaxed">{s.d}</p>
+                <p className="mt-3 text-[11px] text-white/30">Source: {s.src}</p>
               </div>
             ))}
           </div>
